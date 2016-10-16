@@ -127,7 +127,7 @@ $(document).ready(function(e) {
 			socket.on('detail',function(data){
 				var html = '';
 				for (var i = 0; i < data.length; i++) {
-					html += data[i].id+' '+data[i].fname +'<br/>'
+					html += data[i].id+' '+data[i].fname+' '+data[i].lname+' '+data[i].nickname+' '+data[i].program +'<br/>'
 				}
 				$users.html(html);
 			});
