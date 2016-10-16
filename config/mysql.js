@@ -2,10 +2,13 @@ var mysql = require('mysql');
 
 module.exports = function(){
   var connection = mysql.createConnection({
-    host: 'db.chakree.me',
-    user: 'alchemist',
-    password: 'alchemististhebest',
-    database: 'alchemist_orientation',
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'seminar',
+    charset  : 'utf8',
+    port: 8889,
+    socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
   });
 
   return connection;

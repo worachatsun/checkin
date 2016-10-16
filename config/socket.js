@@ -2,16 +2,20 @@
 module.exports = function(http,sql){
 
   var io = require('socket.io')(http);
-
-  // connection.query('select count(*) as allTeacher from teacher',function(err,rows){
-  //   allTeacher = rows[0].allTeacher;
-  // })
+  var connection = sql;
+  var allTeacher;
 
   io.on('connection', function(socket){
 
     socket.on('input', function(msg){
-      console.log('message: ' + msg);
       io.emit('dashboard', msg);
+      var update = 'UPDATE sitdb SET check_in = ? Where id = ?';
+      connection.query(update,[1,msg]);
+
+      connection.query('SELECT * FROM sitdb where check_in = 1 ORDER BY update_at DESC',function(err,rows){
+        io.emit('input', rows);
+      });
+
     });
   });
 }
