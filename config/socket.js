@@ -16,6 +16,10 @@ module.exports = function(http,sql){
         io.emit('input', rows);
       });
 
+      connection.query('SELECT * FROM sitdb where id = '+msg,function(err,rows){
+        io.emit('detail', rows);
+      });
+
     });
   });
 }
