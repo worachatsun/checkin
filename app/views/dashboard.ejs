@@ -120,11 +120,11 @@ $(document).ready(function(e) {
 <body>
 	<center>
 		<div class="element">
-		<div style="font-size:30px; color:white;">สวัสดีจ้าา~</div>
+		<div id="hello" style="font-size:30px; color:white;">สวัสดีจ้าา~</div>
 	  <ul id="messages"></ul>
 	  <img  class="roundedImage" id="pic" src="http://apollo.kmutt.ac.th/kmuttstdpic/default.aspx?&amp;stdcode=">
-			<div id="users">
-			</div>
+		<div id="user">
+		</div>
 		</div>
 	</center>
 	<div style="position:fixed; right:150px; bottom:20px; width:500px; text-align:right; font-size:30px; color:white;
@@ -142,9 +142,15 @@ $(document).ready(function(e) {
     </div>
 
 		<script type="text/javascript">
-		var $users = $('#users');
+		var $users = $('#user');
+		$('#pic').hide();
+		$('#hello').hide();
+		$('#user').hide();
 
 			socket.on('detail',function(data){
+				$('#pic').fadeIn('fast').delay(5000).fadeOut('fast');
+				$('#hello').fadeIn('fast').delay(5000).fadeOut('fast');
+				$('#user').fadeIn('fast').delay(5000).fadeOut('fast');
 				var html = '';
 				for (var i = 0; i < data.length; i++) {
 					html += data[i].id+' '+data[i].fname+' '+data[i].lname+' '+data[i].nickname+' '+data[i].program +'<br/>'

@@ -69,7 +69,7 @@ a:active {
 							<div>
 								<div class="content-style-form content-style-form-4" style="width:600px;">
 									<h2 class="morph-clone">ลงทะเบียนเข้าร่วมงานสัมมนา</h2>
-									<form>
+									<form id="subForm">
 										<p><label style="text-align:center;">กรุณากรอกรหัสนักศึกษา</label>
                                         <input type="text" id="m" placeholder="Student ID" autocomplete="off"/>
                                        </p>
@@ -92,7 +92,7 @@ a:active {
 							<div>
 								<div class="content-style-form content-style-form-4" style="width:600px;">
 									<h2 style="font-size:30px;">ลงทะเบียนเข้าร่วมสัมมนา <br>Introduction to Augmented Reality</h2>
-									<form>
+									<form onsubmit="return false">
 										<p><label>ชื่อ - นามสกุล</label><input type="text" id="name" autocomplete="off" readonly value=""/></p>
 										<p><label>คณะ / สาขา / ภาควิชา</label><input type="text" id="school" autocomplete="off" readonly value=""/></p>
 										<p><button id="btn2cont" style="height:100px; line-height:20px;">
@@ -144,7 +144,7 @@ a:active {
 		var secondbtn;
 		var overlaybtn;
     var socket = io();
-    $('form').submit(function(){
+    $('#subForm').submit(function(){
       socket.emit('input', $('#m').val());
       $('#m').val('');
       return false;
@@ -239,6 +239,12 @@ a:active {
 					$("#btn2loader").fadeIn(300);
 					$("#btn2cont").attr('disabled','disabled');
 					//setTimeout('overlaybtn.toggle()',1000);
+				});
+
+				$(document).keypress(function(e) {
+				    if(e.which == 13) {
+				      return false;
+				    }
 				});
 
             });
