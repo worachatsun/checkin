@@ -12,12 +12,9 @@ module.exports = function(http,sql){
       var update = 'UPDATE sitdb SET check_in = ? Where id = ?';
       connection.query(update,[1,msg]);
 
-      connection.query('SELECT * FROM sitdb where check_in = 1 ORDER BY update_at DESC',function(err,rows){
-        io.emit('input', rows);
-      });
-
       connection.query('SELECT * FROM sitdb where id = '+msg,function(err,rows){
         io.emit('detail', rows);
+        io.emit('input', rows);
       });
 
     });
