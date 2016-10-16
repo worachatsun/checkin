@@ -1,24 +1,261 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>sun</title>
-    <link rel="stylesheet" href="/css/main.css" media="screen" title="no title">
-  </head>
-  <body>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
-  </body>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=700px">
+		<title>สัมมนา</title>
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<link rel="stylesheet" type="text/css" href="css/content.css" />
+       <style>
+	   @import "fonts/thaisansneue/fontface.css";
+	   	html {
+	position: relative;
+	min-height: 100%;
+	background: url(img/bg.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-color: black;
+	font-family:"thaisans_neueregular";
+	overflow-y: scroll;
+	min-width:600px;
+}
+body {
+	/* Margin bottom by footer height */
+	background-color: none;
+	background: none;
+	min-width:600px;
+}
+div,p,h1,h2,h3,h4,h5,h6{
+	font-family:"thaisans_neueregular";
+}
+/* unvisited link */
+a:link {
+    color: #000;
+}
 
-  <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-  <script>
+/* visited link */
+a:visited {
+    color: #000;
+}
+
+/* mouse over link */
+a:hover {
+    color: #666;
+}
+
+/* selected link */
+a:active {
+    color: #000;
+}
+	   </style>
+		<script src="js/modernizr.custom.js"></script>
+	</head>
+	<body>
+		<div class="container" style="min-width:600px;" >
+			<section>
+				<div class="mockup-content">
+					<div style="background-color:rgba(255,130,0,0.6); width:600px; margin:0 auto; height:200px; padding-top:10px; margin-bottom:-34px;">
+                  <h1>Introduction to</h1><h1> Augmented Reality<br>
+                    โดย คุณก้องเกียรติ หิรัญเกิด </h1>
+                  </div>
+					<div class="morph-button btn1 morph-button-inflow morph-button-inflow-1" style="width:600px;">
+						<button type="button" id="btn1toggle"><span>Check-in</span></button>
+						<div class="morph-content" style="width:600px;">
+							<div>
+								<div class="content-style-form content-style-form-4" style="width:600px;">
+									<h2 class="morph-clone">ลงทะเบียนเข้าร่วมงานสัมมนา</h2>
+									<form>
+										<p><label style="text-align:center;">กรุณากรอกรหัสนักศึกษา</label>
+                                        <input type="text" id="m" placeholder="Student ID" autocomplete="off"/>
+                                       </p>
+										<p><button id="btn1cont" style="height:100px; line-height:30px;  margin-top:20px;">
+                                        <span id="btn1text">Check-in</span>
+                                        <span style="display:none;" id="btn1loader">
+                                        	<img src="img/712.png" style="height:60px; margin-top:-12px; opacity:0.5;" >
+                                        </span></button></p>
+                                    <span style="color:red; display:none; width:100%; font-size:15px;" id="btn1error"></span>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- morph-button -->
+        </div>
+          <div class="morph-button btn2 morph-button-modal morph-button-modal-3 morph-button-fixed">
+						<div class="morph-content" style="width:600px;">
+							<div>
+								<div class="content-style-form content-style-form-4" style="width:600px;">
+									<h2 style="font-size:30px;">ลงทะเบียนเข้าร่วมสัมมนา <br>Introduction to Augmented Reality</h2>
+									<!-- <form>
+										<p><label>ชื่อ - นามสกุล</label><input type="text" id="name" autocomplete="off" readonly /></p>
+										<p><label>คณะ / สาขา / ภาควิชา</label><input type="text" id="school" autocomplete="off" readonly /></p>
+										<p><button id="btn2cont" style="height:100px; line-height:20px;">
+                                        <span id="btn2text">ยืนยันการลงทะเบียนเข้าร่วมสัมมนา</span>
+                                        <span style="display:none;" id="btn2loader">
+                                        	<img src="img/712.png" style="height:60px; margin-top:-12px; opacity:0.5;" >
+                                        </span>
+                                        </button></p>
+									</form> -->
+								</div>
+							</div>
+						</div>
+					</div><!-- morph-button -->
+                 <div style="background-color:rgba(255,130,0,0.6); width:600px; margin:0 auto; height:200px; margin-top:-137px;">
+                 <br>
+                 <table style="margin: 0 auto; padding-top:30px; font-size:25px; width:400px;">
+                 <tr><td style="width:70px;"  align="center"><img src="img/calendar.png" style="height:40px;"></td><td>วันจันทร์ที่ 17 ตุลาคม พ.ศ. 2559</td></tr>
+                 <tr><td style="width:70px;"  align="center"><img src="img/clock.png" style="height:40px;"></td><td>เวลา 12.30 - 14.30 น.</td></tr>
+                 <tr><td style="width:70px;" align="center"><img src="img/location.png" style="height:40px;"></td><td>อาคารเรียนรวม 2 ห้อง CB2301</td></tr>
+                 </table>
+                  </div>
+			</section>
+
+
+            <div class="morph-button btnoverlay morph-button-overlay morph-button-fixed">
+					<button type="button" style="display:none;">More Info</button>
+					<div class="morph-content">
+						<div>
+							<div class="content-style-overlay">
+								<a href="./"><span class="icon icon-close">Close the overlay</span></a>
+									<h1>ขออภัย ระบบยังไม่เปิดให้ลงทะเบียนในช่วงเวลานี้ <br><br> เปิดรับลงทะเบียน ตั้งแต่วันอังคารที่ 11 ตุลาคม 2559 - วันอาทิตย์ที่ 16 ตุลาคม 2559 <br>หรือจนกว่าที่นั่งจะเต็ม</h1>
+                             </div>
+						</div>
+					</div>
+				</div><!-- morph-button -->
+
+
+
+		</div><!-- /container -->
+        <div id="logo" style="position:fixed; left:10px; bottom:10px;">
+        	<img src="img/logo.png" style="width:25%;">
+        </div>
+		<script src="js/classie.js"></script>
+		<script src="js/uiMorphingButton_inflow.js"></script>
+        <script src="js/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+		<script>
+		var firstbtn;
+		var secondbtn;
+		var overlaybtn;
     var socket = io();
     $('form').submit(function(){
       socket.emit('input', $('#m').val());
       $('#m').val('');
       return false;
     });
-  </script>
+
+			$(document).ready(function(e) {
+
+				firstbtn = new UIMorphingButton( document.querySelector( '.btn1' ) );
+				$("#btn1toggle").on("click",function(e){
+					firstbtn.toggle();
+				});
+
+
+                var docElem = window.document.documentElement, didScroll, scrollPosition;
+
+				// trick to prevent scrolling when opening/closing button
+				function noScrollFn() {
+					window.scrollTo( scrollPosition ? scrollPosition.x : 0, scrollPosition ? scrollPosition.y : 0 );
+				}
+
+				function noScroll() {
+					window.removeEventListener( 'scroll', scrollHandler );
+					window.addEventListener( 'scroll', noScrollFn );
+				}
+
+				function scrollFn() {
+					window.addEventListener( 'scroll', scrollHandler );
+				}
+
+				function canScroll() {
+					window.removeEventListener( 'scroll', noScrollFn );
+					scrollFn();
+				}
+
+				function scrollHandler() {
+					if( !didScroll ) {
+						didScroll = true;
+						setTimeout( function() { scrollPage(); }, 60 );
+					}
+				};
+
+				function scrollPage() {
+					scrollPosition = { x : window.pageXOffset || docElem.scrollLeft, y : window.pageYOffset || docElem.scrollTop };
+					didScroll = false;
+				};
+
+				scrollFn();
+
+					secondbtn = new UIMorphingButton( document.querySelector( '.btn2' ) , {
+						onBeforeOpen : function() {
+							// don't allow to scroll
+							noScroll();
+
+						},
+						onAfterOpen : function() {
+							// can scroll again
+							canScroll();
+						},
+						onBeforeClose : function() {
+							// don't allow to scroll
+							return false;
+							noScroll();
+						},
+						onAfterClose : function() {
+							// can scroll again
+							canScroll();
+						}
+				} );
+
+
+				overlaybtn = new UIMorphingButton( document.querySelector( '.btnoverlay' ) );
+
+				$("#btn2cont").on("click",function(e){
+					e.preventDefault();
+					$("#btn2text").hide();
+					$("#btn2loader").fadeIn(300);
+					$("#btn2cont").attr('disabled','disabled');
+					//setTimeout('overlaybtn.toggle()',1000);
+					$.ajax({
+						  type: 'POST',
+						  url: 'save.php',
+						  dataType: 'json',
+						  data: {'ok' : 1 },
+						  success: function(data)
+							  {
+								if(data.status == 1){
+									setTimeout('$("#btn2text").html("ลงทะเบียนเรียบร้อย ขอบคุณครับ")',500);
+									$("#btn2text").html("");
+									$("#btn2text").show();
+									$("#btn2loader").fadeOut(300);
+								}else if(data.status == 9){
+									setTimeout('$("#btn2text").html("การลงทะเบียนไม่สมบูรณ์ ระบบผิดพลาด โปรดแจ้ง kunchai.sdhm@gmail.com")',500);
+									alert("ระบบผิดพลาด โปรดแจ้ง kunchai.sdhm@gmail.com\n"+data.error);
+									$("#btn2text").html("");
+									$("#btn2text").show();
+									$("#btn2loader").fadeOut(300);
+								}else if(data.status == 0){
+									setTimeout('$("#btn2text").html("ไม่สามารถลงทะเบียนได้ เพราะขณะนี้ที่นั่งเต็มแล้ว ขออภัยด้วยครับ")',500);
+									$("#btn2text").html("");
+									$("#btn2text").show();
+									$("#btn2loader").fadeOut(300);
+								}else if(data.status == 2){
+									setTimeout('$("#btn2text").html("คุณได้ลงทะเบียนเข้าร่วมงานแล้วครับ")',500);
+									$("#btn2text").html("");
+									$("#btn2text").show();
+									$("#btn2loader").fadeOut(300);
+								}
+							  }
+						});
+				});
+
+            });
+		</script>
+	</body>
 </html>

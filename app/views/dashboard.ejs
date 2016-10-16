@@ -5,8 +5,6 @@
     <title></title>
   </head>
   <body>
-    <ul id="messages"></ul>
-    <img id="pic" src="http://apollo.kmutt.ac.th/kmuttstdpic/default.aspx?&amp;stdcode=">
   </body>
 
   <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
@@ -21,4 +19,118 @@
         })
     });
   </script>
+</html>
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Backdrop</title>
+<script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="css/animate.css" />
+<link rel="stylesheet" href="thaisansneue/fontface.css" />
+<style>
+	html,body{
+		min-height:100%;
+		min-width:100%;
+		overflow:hidden;
+		font-family: 'thaisans_neueregular';
+	}
+	html{
+		background-color:rgb(41,41,41);
+		transition: background-color 0.5s ease;
+	}
+	.popupImg{
+		position:absolute;
+		height:120px;
+		display:none;
+	}
+</style>
+<script>
+var objid = 0;
+var imgid = 0;
+var lastleft = 0;
+var lasttop = 0;
+function generateRandomLeft() {
+  var max = $( window ).width()-100;
+  var min = -100;
+  do{
+  	var num = Math.random() * (max - min) + min;
+  }while(Math.abs(num-lastleft) < 300)
+  lastleft = num;
+  return Math.floor(num);
+}
+
+function generateRandomTop() {
+  var max = $( window ).height()-100;
+  var min = -100;
+  var num = 0;
+  do{
+  	num = Math.random() * (max - min) + min;
+  }while(Math.abs(num-lasttop) < 300)
+  lasttop = num;
+  return Math.floor(num);
+}
+
+function generateRotate() {
+  var max = 20
+  var min = -20;
+  num = Math.random() * (max - min) + min;
+  return Math.floor(num);
+}
+
+function getImgUrl(){
+  var url = "device/"+ ++imgid +".png";
+  if(imgid == 6){
+  	imgid = 1;
+  }
+  return url;
+}
+
+function createNewObject(){
+	var currentObjId = objid++;
+	var head = "<div class='popupImg animated zoomIn' id='obj"+currentObjId+"'>";
+	var content = "<img src='"+getImgUrl()+"' style='height:100%;'>";
+	var end = "</div>";
+	$("body").append(head+content+end);
+	$("#obj"+currentObjId).show();
+	$("#obj"+currentObjId).css('top',generateRandomTop()+"px");
+	$("#obj"+currentObjId).css('left',generateRandomLeft()+"px");
+	$("#obj"+currentObjId+" img").css('transform','rotate('+generateRotate()+'deg)');
+	setTimeout('$("#obj'+currentObjId+'").removeClass("zoomIn");',1000);
+	setTimeout('$("#obj'+currentObjId+'").addClass("zoomOut");',1500);
+	setTimeout('$("#obj'+currentObjId+'").remove();',2500);
+}
+var colorcount = 0;
+var color = ['#4A89DC','#3BAFDA','#37BC9B','#8CC152','#F6BB42','#DA4453','#967ADC','#434A54','#D770AD'];
+function changeBg(){
+	$("html").css('background-color',color[colorcount++]);
+	if(colorcount == 8) colorclount = 0;
+}
+
+$(document).ready(function(e) {
+    setInterval('createNewObject()',200);
+	setInterval('changeBg()',2000);
+});
+
+</script>
+</head>
+
+<body>
+  <ul id="messages"></ul>
+  <img id="pic" src="http://apollo.kmutt.ac.th/kmuttstdpic/default.aspx?&amp;stdcode=">
+	<div style="position:fixed; right:150px; bottom:20px; width:500px; text-align:right; font-size:30px; color:white;
+    text-shadow: 2px 2px 8px #000000; line-height:1.5em; z-index:1000">
+    <div style="font-size:0.8em;">งานสัมมนาเรื่อง</div>
+    <div style="">Introduction to Augmented Reality</div>
+    <div style="">โดย คุณก้องเกียรติ หิรัญเกิด</div>
+    </div>
+    <div style="position:fixed; right:20px; bottom:20px; z-index:1000">
+    	<img src="img/OpenAR.png" style="width:100px; border-radius:10px; shadow: 2px 2px 8px #000000;">
+    </div>
+	<audio src="song2.mp3" style="width:0; height:0;" autoplay></audio>
+    <div style="position:fixed; left:10px; bottom:10px; z-index:1000;">
+    	<img src="img/logo_w.png" style="width:300px;">
+    </div>
+</body>
 </html>
