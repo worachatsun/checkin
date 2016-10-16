@@ -71,9 +71,9 @@ a:active {
 							<div>
 								<div class="content-style-form content-style-form-4" style="width:600px;">
 									<h2 class="morph-clone">ลงทะเบียนเข้าร่วมงานสัมมนา</h2>
-									<form>
+									<form id="signupForm">
 										<p><label style="text-align:center;">กรุณากรอกรหัสนักศึกษา</label>
-                                        <input type="text" id="m" placeholder="Student ID" autocomplete="off"/>
+                                        <input type="text" id="m" name='m' placeholder="Student ID" autocomplete="off"/>
                                        </p>
 										<p><button id="btn1cont" style="height:100px; line-height:30px;  margin-top:20px;">
                                         <span id="btn1text">Check-in</span>
@@ -139,6 +139,20 @@ a:active {
 		<script src="js/classie.js"></script>
 		<script src="js/uiMorphingButton_inflow.js"></script>
     <script src="js/jquery-2.1.1.min.js"></script>
+
+		<script src="js/jquery.validate.js"></script>
+		<script type="text/javascript">
+		$("#signupForm").validate({
+			rules: {
+				m: {
+					required: true,
+					minlength: 11,
+					maxlength: 11
+				}
+			}
+		});
+		</script>
+
     <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 		<script>
 		var firstbtn;
