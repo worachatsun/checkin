@@ -24,6 +24,21 @@
 		height:120px;
 		display:none;
 	}
+	.roundedImage {
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    overflow:hidden;
+    -webkit-border-radius:50px;
+    -moz-border-radius:50px;
+    border-radius:50%;
+    width:250px;
+    height:250px;
+}
+.element{
+	margin-top: 5%;
+	z-index: 999;
+}
 </style>
 <script>
 var objid = 0;
@@ -103,10 +118,14 @@ $(document).ready(function(e) {
 </head>
 
 <body>
-  <ul id="messages"></ul>
-  <img id="pic" src="http://apollo.kmutt.ac.th/kmuttstdpic/default.aspx?&amp;stdcode=">
-	<div id="users">
-	</div>
+	<center>
+		<div class="element"></div>
+		<div style="font-size:30px; color:white;">สวัสดีจ้าา~</div>
+	  <ul id="messages"></ul>
+	  <img  class="roundedImage" id="pic" src="http://apollo.kmutt.ac.th/kmuttstdpic/default.aspx?&amp;stdcode=">
+			<div id="users">
+			</div>
+	</center>
 	<div style="position:fixed; right:150px; bottom:20px; width:500px; text-align:right; font-size:30px; color:white;
     text-shadow: 2px 2px 8px #000000; line-height:1.5em; z-index:1000">
     <div style="font-size:0.8em;">งานสัมมนาเรื่อง</div>
