@@ -56,8 +56,6 @@ a:active {
 		<script src="js/modernizr.custom.js"></script>
 	</head>
 	<body>
-    <div id="users">
-    </div>
 		<div class="container" style="min-width:600px;" >
 			<section>
 				<div class="mockup-content">
@@ -71,9 +69,9 @@ a:active {
 							<div>
 								<div class="content-style-form content-style-form-4" style="width:600px;">
 									<h2 class="morph-clone">ลงทะเบียนเข้าร่วมงานสัมมนา</h2>
-									<form id="signupForm">
+									<form>
 										<p><label style="text-align:center;">กรุณากรอกรหัสนักศึกษา</label>
-                                        <input type="text" id="m" name='m' placeholder="Student ID" autocomplete="off"/>
+                                        <input type="text" id="m" placeholder="Student ID" autocomplete="off"/>
                                        </p>
 										<p><button id="btn1cont" style="height:100px; line-height:30px;  margin-top:20px;">
                                         <span id="btn1text">Check-in</span>
@@ -86,27 +84,28 @@ a:active {
 							</div>
 						</div>
 					</div>
-					<!-- morph-button -->
+
         </div>
+        <!--กล่องโชว์ข้อมูล-->
           <div class="morph-button btn2 morph-button-modal morph-button-modal-3 morph-button-fixed">
 						<div class="morph-content" style="width:600px;">
 							<div>
 								<div class="content-style-form content-style-form-4" style="width:600px;">
 									<h2 style="font-size:30px;">ลงทะเบียนเข้าร่วมสัมมนา <br>Introduction to Augmented Reality</h2>
-									<!-- <form>
+									<form>
 										<p><label>ชื่อ - นามสกุล</label><input type="text" id="name" autocomplete="off" readonly /></p>
 										<p><label>คณะ / สาขา / ภาควิชา</label><input type="text" id="school" autocomplete="off" readonly /></p>
 										<p><button id="btn2cont" style="height:100px; line-height:20px;">
-                                        <span id="btn2text">ยืนยันการลงทะเบียนเข้าร่วมสัมมนา</span>
+                                        <span id="btn2text">Check in เรียบร้อยแล้วจ้า</span>
                                         <span style="display:none;" id="btn2loader">
                                         	<img src="img/712.png" style="height:60px; margin-top:-12px; opacity:0.5;" >
                                         </span>
                                         </button></p>
-									</form> -->
+									</form>
 								</div>
 							</div>
 						</div>
-					</div><!-- morph-button -->
+					</div>
                  <div style="background-color:rgba(255,130,0,0.6); width:600px; margin:0 auto; height:200px; margin-top:-137px;">
                  <br>
                  <table style="margin: 0 auto; padding-top:30px; font-size:25px; width:400px;">
@@ -138,42 +137,18 @@ a:active {
         </div>
 		<script src="js/classie.js"></script>
 		<script src="js/uiMorphingButton_inflow.js"></script>
-    <script src="js/jquery-2.1.1.min.js"></script>
-
-		<script src="js/jquery.validate.js"></script>
-		<script type="text/javascript">
-		$("#signupForm").validate({
-			rules: {
-				m: {
-					required: true,
-					minlength: 11,
-					maxlength: 11
-				}
-			}
-		});
-		</script>
-
-    <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+        <script src="js/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 		<script>
 		var firstbtn;
 		var secondbtn;
 		var overlaybtn;
     var socket = io();
-    var $users = $('#users');
-
     $('form').submit(function(){
       socket.emit('input', $('#m').val());
       $('#m').val('');
       return false;
     });
-
-    socket.on('input',function(data){
-        var html = '';
-        for (var i = 0; i < data.length; i++) {
-          html += data[i].id +'<br/>'
-        }
-        $users.html(html);
-      });
 
 			$(document).ready(function(e) {
 
@@ -181,9 +156,20 @@ a:active {
 				$("#btn1toggle").on("click",function(e){
 					firstbtn.toggle();
 				});
+        //ถ้ากดตกลงกล่องแรก ก็จะให้เด้งไปกล่องที่สอง
+        $("#btn1cont").on("click",function(e){
+         $("#btn1text").hide();
+					$("#btn1loader").fadeIn(300);
+					$("#btn1error").slideUp(200);
+          setTimeout('firstbtn.toggle();',500);
+          setTimeout('secondbtn.toggle();',800);
+        });
+        //ถ้ากดปุ่มที่ 2 ให้ Reload
+        $("#btn2cont").on("click",function(e){
+          location.reload();
+        });
 
-
-                var docElem = window.document.documentElement, didScroll, scrollPosition;
+        var docElem = window.document.documentElement, didScroll, scrollPosition;
 
 				// trick to prevent scrolling when opening/closing button
 				function noScrollFn() {
@@ -248,37 +234,6 @@ a:active {
 					$("#btn2loader").fadeIn(300);
 					$("#btn2cont").attr('disabled','disabled');
 					//setTimeout('overlaybtn.toggle()',1000);
-					$.ajax({
-						  type: 'POST',
-						  url: 'save.php',
-						  dataType: 'json',
-						  data: {'ok' : 1 },
-						  success: function(data)
-							  {
-								if(data.status == 1){
-									setTimeout('$("#btn2text").html("ลงทะเบียนเรียบร้อย ขอบคุณครับ")',500);
-									$("#btn2text").html("");
-									$("#btn2text").show();
-									$("#btn2loader").fadeOut(300);
-								}else if(data.status == 9){
-									setTimeout('$("#btn2text").html("การลงทะเบียนไม่สมบูรณ์ ระบบผิดพลาด โปรดแจ้ง kunchai.sdhm@gmail.com")',500);
-									alert("ระบบผิดพลาด โปรดแจ้ง kunchai.sdhm@gmail.com\n"+data.error);
-									$("#btn2text").html("");
-									$("#btn2text").show();
-									$("#btn2loader").fadeOut(300);
-								}else if(data.status == 0){
-									setTimeout('$("#btn2text").html("ไม่สามารถลงทะเบียนได้ เพราะขณะนี้ที่นั่งเต็มแล้ว ขออภัยด้วยครับ")',500);
-									$("#btn2text").html("");
-									$("#btn2text").show();
-									$("#btn2loader").fadeOut(300);
-								}else if(data.status == 2){
-									setTimeout('$("#btn2text").html("คุณได้ลงทะเบียนเข้าร่วมงานแล้วครับ")',500);
-									$("#btn2text").html("");
-									$("#btn2text").show();
-									$("#btn2loader").fadeOut(300);
-								}
-							  }
-						});
 				});
 
             });
